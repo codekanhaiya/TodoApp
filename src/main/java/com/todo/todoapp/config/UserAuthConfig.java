@@ -19,14 +19,12 @@ public class UserAuthConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity
-                .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/userbasic/public").permitAll()
-                        .requestMatchers("/todos/**").permitAll()
-                        .requestMatchers("/userbasic/account").hasRole("USER")
-                        .requestMatchers("/userbasic/admin").hasRole("ADMIN")
-                        .anyRequest().authenticated())
-                .httpBasic((Customizer.withDefaults()));
+        httpSecurity.authorizeHttpRequests((requests) -> requests
+                .requestMatchers("/userauth/public").permitAll()
+                .requestMatchers("/todos/**").permitAll()
+                .requestMatchers("/userauth/account").hasRole("USER")
+                .requestMatchers("/userauth/admin").hasRole("ADMIN")
+                .anyRequest().authenticated()).httpBasic(Customizer.withDefaults());
         return httpSecurity.build();
     }
 
